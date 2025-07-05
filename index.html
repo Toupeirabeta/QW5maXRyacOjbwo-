@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>LOGIN</title>
   <style>
     html, body {
       margin: 0;
@@ -18,7 +18,8 @@
     .container {
       display: flex;
       flex-direction: column;
-      height: 100%;
+      height: 100vh;
+      width: 100vw;
     }
 
     .bar-horizontal {
@@ -86,6 +87,15 @@
     .login-box input[type="submit"]:hover {
       background-color: #6a0dad;
     }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #ccc;
+    }
   </style>
   <script>
     function validarLogin(event) {
@@ -106,18 +116,26 @@
     <div class="middle">
       <div class="side-bar"></div>
       <div class="content">
-        <div class="login-box">
-          <h2>Login</h2>
-          <form onsubmit="validarLogin(event)">
-            <input type="text" id="usuario" placeholder="Usuário" required>
-            <input type="password" id="senha" placeholder="Senha" required>
-            <input type="submit" value="Entrar">
-          </form>
+        <div>
+          <a href="https://x.com/QW5maXRyacOj" target="_blank">
+            <img src="assets/Anfitrião.webp" alt="Símbolo" style="display: block; margin: 0 auto 20px auto; max-width: 100px;">
+          </a>
+          <div class="login-box">
+            <h2>Login</h2>
+            <form onsubmit="validarLogin(event)">
+              <input type="text" id="usuario" placeholder="Usuário" required>
+              <input type="password" id="senha" placeholder="Senha" required>
+              <input type="submit" value="Entrar">
+            </form>
+          </div>
         </div>
       </div>
       <div class="side-bar"></div>
     </div>
     <div class="bar-horizontal"></div>
   </div>
+  <footer>
+    Darkest Studio 2025
+  </footer>
 </body>
 </html>
