@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pagina</title>
+  <title>LOGIN</title>
   <style>
     html, body {
       margin: 0;
@@ -61,36 +61,74 @@
       white-space: pre-wrap;
       color: #ccc;
     }
-  </style>
-  <script>
-    const texto = `Esta é uma frase de teste de texto e efeito, caso ela funcione qualquer texto poderá ser adicionado apenas alterando uma parte do codigo.`;
-    let i = 0;
 
-    function digitar() {
-      const elemento = document.getElementById("typed-text");
-      if (i < texto.length) {
-        elemento.textContent += texto.charAt(i);
-        i++;
-        setTimeout(digitar, 40);
-      }
+    .logo-img {
+      display: block;
+      margin: 0 auto 20px auto;
+      max-width: 100px;
     }
-
-    document.addEventListener("DOMContentLoaded", digitar);
-  </script>
+  </style>
 </head>
 <body>
+  <audio id="bg-audio" src="assets/background.mp3" autoplay loop></audio>
   <div class="container">
     <div class="bar-horizontal"></div>
     <div class="middle">
       <div class="side-bar"></div>
       <div class="content">
-        <div class="text-box">
-          <div id="typed-text"></div>
+        <div>
+          <img src="assets/Anfitrião.webp" alt="Símbolo" class="logo-img">
+          <div class="text-box">
+            <div id="typed-text"></div>
+          </div>
         </div>
       </div>
       <div class="side-bar"></div>
     </div>
     <div class="bar-horizontal"></div>
   </div>
+  <script>
+    const textos = [
+      `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet lorem at justo cursus scelerisque. Integer porttitor purus eu mauris facilisis, a consectetur lorem tempus.`,
+      `Segunda mensagem: Vivamus luctus urna sed urna ultricies ac tempor dui sagittis. In condimentum facilisis porta.`,
+      `Terceira mensagem: Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper.`
+    ];
+
+    let mensagemAtual = 0;
+    let i = 0;
+
+    function digitarTexto(texto) {
+      const elemento = document.getElementById("typed-text");
+      elemento.textContent = "";
+      i = 0;
+      function digitar() {
+        if (i < texto.length) {
+          elemento.textContent += texto.charAt(i);
+          i++;
+          setTimeout(digitar, 40);
+        }
+      }
+      digitar();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      digitarTexto(textos[mensagemAtual]);
+
+      const audio = document.getElementById("bg-audio");
+      audio.volume = 0.4;
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.warn("Autoplay bloqueado, aguardando interação do usuário.");
+          document.addEventListener("click", () => audio.play(), { once: true });
+        });
+      }
+    });
+
+    document.addEventListener("click", () => {
+      mensagemAtual = (mensagemAtual + 1) % textos.length;
+      digitarTexto(textos[mensagemAtual]);
+    });
+  </script>
 </body>
 </html>
